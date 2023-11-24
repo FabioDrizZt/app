@@ -1,4 +1,9 @@
-<?php require_once('../../templates/header.php') ?>
+<?php require_once('../../bd.php');
+$sentencia = $conexion->prepare('SELECT * FROM `tbl_puestos`');
+// Si la consulta necesita datos iran aquí
+$sentencia->execute();
+$lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+?><?php require_once('../../templates/header.php') ?>
 <div class="container card">
   <h2>Index de puestos</h2>
   <div class="card-header">
@@ -15,16 +20,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="">
-            <td scope="row">1</td>
-            <td>Frontend</td>
-            <td>Editar|Eliminar</td>
-          </tr>
-          <tr class="">
-            <td scope="row">2</td>
-            <td>Backend</td>
-            <td>Editar|Eliminar</td>
-          </tr>
+          <?php foreach ($lista_tbl_puestos as $puesto) { ?>
+            <tr class="">
+              <td scope="row"><?= $puesto['id'] ?></td>
+              <td><?= $puesto['nombredelpuesto'] ?></td>
+              <td>
+                <a class="btn btn-info" href="editar.php">Editar</a>
+                <a class="btn btn-danger" href="index.php">Eliminar</a>
+              </td>
+            </tr>
+          <?php } ?>
         </tbody>
       </table>
     </div>

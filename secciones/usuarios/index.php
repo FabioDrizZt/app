@@ -1,3 +1,9 @@
+<?php require_once('../../bd.php');
+$sentencia = $conexion->prepare('SELECT * FROM `tbl_usuarios`');
+// Si la consulta necesita datos iran aquí
+$sentencia->execute();
+$lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+?>
 <?php require_once('../../templates/header.php') ?>
 <div class="container card">
   <h2>Index de usuarios</h2>
@@ -17,20 +23,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="">
-            <td scope="row">1</td>
-            <td>fabioarganaraz</td>
-            <td>*********</td>
-            <td>fabioarganaraz@soydigitalmind.com</td>
-            <td>Editar|Eliminar</td>
-          </tr>
-          <tr class="">
-            <td scope="row">2</td>
-            <td>fabioarganaraz</td>
-            <td>*********</td>
-            <td>fabioarganaraz@soydigitalmind.com</td>
-            <td>Editar|Eliminar</td>
-          </tr>
+          <?php foreach ($lista_tbl_usuarios as $usuario) : ?>
+            <tr>
+              <td scope="row"><?= $usuario['id']; ?></td>
+              <td><?= $usuario['usuario']; ?></td>
+              <td><?= '*********'; ?></td>
+              <td><?= $usuario['correo']; ?></td>
+              <td>
+                <a class="btn btn-info" href="editar.php?id=<?= $usuario['id']; ?>">Editar</a>
+                <a class="btn btn-danger" href="index.php?id=<?= $usuario['id']; ?>">Eliminar</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
