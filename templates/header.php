@@ -1,3 +1,6 @@
+<?php
+$url_base = "http://localhost/app/";
+?>
 <!doctype html>
 <html lang="es">
 
@@ -45,10 +48,10 @@
     </a>
 
     <ul class="nav nav-pills">
-      <li class="nav-item"><a href="index.php" class="nav-link active" aria-current="page">Inicio</a></li>
-      <li class="nav-item"><a href="empleados.php" class="nav-link">Empleados</a></li>
-      <li class="nav-item"><a href="puestos.php" class="nav-link">Puestos</a></li>
-      <li class="nav-item"><a href="usuarios.php" class="nav-link">Usuarios</a></li>
-      <li class="nav-item"><a href="login.php" class="nav-link">Iniciar Sesión</a></li>
+      <li class="nav-item"><a href="<?=$url_base?>index.php" class="nav-link active" aria-current="page">Inicio</a></li>
+      <li class="nav-item"><a href="<?=$url_base?>secciones/empleados" class="nav-link">Empleados</a></li>
+      <li class="nav-item"><a href="<?=$url_base?>secciones/puestos" class="nav-link">Puestos</a></li>
+      <li class="nav-item"><a href="<?=$url_base?>secciones/usuarios" class="nav-link">Usuarios</a></li>
+      <li class="nav-item"><a href="<?=$url_base?>login.php" class="nav-link">Iniciar Sesión</a></li>
     </ul>
   </header>
