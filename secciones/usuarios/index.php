@@ -3,6 +3,16 @@ $sentencia = $conexion->prepare('SELECT * FROM `tbl_usuarios`');
 // Si la consulta necesita datos iran aquí
 $sentencia->execute();
 $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+if (isset($_GET['txtID'])) {
+  // Eliminar un registro de la tabla tbl_usuarios
+  $id = $_GET["txtID"];
+
+  $sentencia = $conexion->prepare('DELETE FROM `tbl_usuarios` WHERE id=:id');
+  // Si la consulta necesita datos iran aquí
+  $sentencia->bindParam(":id", $id);
+  $sentencia->execute();
+  header("Location: index.php");
+}
 ?>
 <?php require_once('../../templates/header.php') ?>
 <div class="container card">
@@ -30,8 +40,8 @@ $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
               <td><?= '*********'; ?></td>
               <td><?= $usuario['correo']; ?></td>
               <td>
-                <a class="btn btn-info" href="editar.php?id=<?= $usuario['id']; ?>">Editar</a>
-                <a class="btn btn-danger" href="index.php?id=<?= $usuario['id']; ?>">Eliminar</a>
+                <a class="btn btn-info" href="editar.php?txtID=<?= $usuario['id']; ?>">Editar</a>
+                <a class="btn btn-danger" href="index.php?txtID=<?= $usuario['id']; ?>">Eliminar</a>
               </td>
             </tr>
           <?php endforeach; ?>

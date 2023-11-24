@@ -3,6 +3,17 @@ $sentencia = $conexion->prepare('SELECT * FROM `tbl_empleados`');
 // Si la consulta necesita datos iran aquí
 $sentencia->execute();
 $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+if (isset($_GET['txtID'])) {
+  // Eliminar un registro de la tabla tbl_empleados
+  $id = $_GET["txtID"];
+
+  $sentencia = $conexion->prepare('DELETE FROM `tbl_empleados` WHERE id=:id');
+  // Si la consulta necesita datos iran aquí
+  $sentencia->bindParam(":id", $id);
+  $sentencia->execute();
+  header("Location: index.php");
+}
 ?>
 <?php require_once('../../templates/header.php') ?>
 <div class="container card">
@@ -25,18 +36,18 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($lista_tbl_empleados as $registro) { ?>
+          <?php foreach ($lista_tbl_empleados as $empleado) { ?>
             <tr class="">
-              <td scope="row"><?= $registro['id'] ?></td>
-              <td><?= $registro['primernombre'] ." ". $registro['segundonombre'] ." ". $registro['primerapellido'] ." ". $registro['segundoapellido'] ?></td>
-              <td><?= $registro['foto'] ?></td>
-              <td><?= $registro['cv'] ?></td>
-              <td><?= $registro['idpuesto'] ?></td>
-              <td><?= $registro['fechadeingreso'] ?></td>
+              <td scope="row"><?= $empleado['id'] ?></td>
+              <td><?= $empleado['primernombre'] . " " . $empleado['segundonombre'] . " " . $empleado['primerapellido'] . " " . $empleado['segundoapellido'] ?></td>
+              <td><?= $empleado['foto'] ?></td>
+              <td><?= $empleado['cv'] ?></td>
+              <td><?= $empleado['idpuesto'] ?></td>
+              <td><?= $empleado['fechadeingreso'] ?></td>
               <td>
-                <a class="btn btn-success" href="carta.php">Editar</a>
+                <a class="btn btn-success" href="carta.php">Carta</a>
                 <a class="btn btn-info" href="editar.php">Editar</a>
-                <a class="btn btn-danger" href="index.php">Eliminar</a>
+                <a class="btn btn-danger" href="index.php?txtID=<?= $empleado['id']; ?>">Eliminar</a>
               </td>
             </tr>
           <?php } ?>

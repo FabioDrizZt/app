@@ -3,7 +3,20 @@ $sentencia = $conexion->prepare('SELECT * FROM `tbl_puestos`');
 // Si la consulta necesita datos iran aquí
 $sentencia->execute();
 $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-?><?php require_once('../../templates/header.php') ?>
+if (isset($_GET['txtID'])) {
+  // Eliminar un registro de la tabla tbl_puestos
+  $id = $_GET["txtID"];
+
+  $sentencia = $conexion->prepare('DELETE FROM `tbl_puestos` WHERE id=:id');
+  // Si la consulta necesita datos iran aquí
+  $sentencia->bindParam(":id", $id);
+  $sentencia->execute();
+  header("Location: index.php");
+}
+
+?>
+
+<?php require_once('../../templates/header.php') ?>
 <div class="container card">
   <h2>Index de puestos</h2>
   <div class="card-header">
@@ -26,7 +39,7 @@ $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
               <td><?= $puesto['nombredelpuesto'] ?></td>
               <td>
                 <a class="btn btn-info" href="editar.php">Editar</a>
-                <a class="btn btn-danger" href="index.php">Eliminar</a>
+                <a class="btn btn-danger" href="index.php?txtID=<?= $puesto['id']; ?>">Eliminar</a>
               </td>
             </tr>
           <?php } ?>
