@@ -12,7 +12,11 @@ $url_base = "http://localhost/app/";
 
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
+  <!-- Script de Jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <!-- CDNs de DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -48,10 +52,10 @@ $url_base = "http://localhost/app/";
     </a>
 
     <ul class="nav nav-pills">
-      <li class="nav-item"><a href="<?=$url_base?>index.php" class="nav-link active" aria-current="page">Inicio</a></li>
-      <li class="nav-item"><a href="<?=$url_base?>secciones/empleados" class="nav-link">Empleados</a></li>
-      <li class="nav-item"><a href="<?=$url_base?>secciones/puestos" class="nav-link">Puestos</a></li>
-      <li class="nav-item"><a href="<?=$url_base?>secciones/usuarios" class="nav-link">Usuarios</a></li>
-      <li class="nav-item"><a href="<?=$url_base?>login.php" class="nav-link">Iniciar Sesión</a></li>
+      <li class="nav-item"><a href="<?= $url_base ?>index.php" class="nav-link active" aria-current="page">Inicio</a></li>
+      <li class="nav-item"><a href="<?= $url_base ?>secciones/empleados" class="nav-link">Empleados</a></li>
+      <li class="nav-item"><a href="<?= $url_base ?>secciones/puestos" class="nav-link">Puestos</a></li>
+      <li class="nav-item"><a href="<?= $url_base ?>secciones/usuarios" class="nav-link">Usuarios</a></li>
+      <li class="nav-item"><a href="<?= $url_base ?>login.php" class="nav-link">Iniciar Sesión</a></li>
     </ul>
   </header>
