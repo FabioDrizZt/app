@@ -38,7 +38,7 @@ if (isset($_GET['txtID'])) {
               <td scope="row"><?= $puesto['id'] ?></td>
               <td><?= $puesto['nombredelpuesto'] ?></td>
               <td>
-                <a class="btn btn-info" href="editar.php">Editar</a>
+                <a class="btn btn-info" href="editar.php?txtID=<?= $puesto['id']; ?>">Editar</a>
                 <a class="btn btn-danger" href="index.php?txtID=<?= $puesto['id']; ?>">Eliminar</a>
               </td>
             </tr>
