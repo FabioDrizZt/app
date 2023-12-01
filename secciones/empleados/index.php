@@ -7,7 +7,22 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['txtID'])) {
   // Eliminar un registro de la tabla tbl_empleados
   $id = $_GET["txtID"];
-
+  // Borrado de la imagen fisica en el servidor
+  $sentencia = $conexion->prepare('SELECT `foto`, `cv` FROM `tbl_empleados` WHERE id=:id');
+  $sentencia->bindParam(":id", $id);
+  $sentencia->execute();
+  $registro = $sentencia->fetch(PDO::FETCH_LAZY);
+  if (isset($registro['foto'])) {
+    if (file_exists("./images/" . $registro['foto'])) {
+      unlink("./images/" . $registro['foto']);
+    }
+  }
+  if (isset($registro['cv'])) {
+    if (file_exists("./documents/" . $registro['cv'])) {
+      unlink("./documents/" . $registro['cv']);
+    }
+  }
+  // Borrar de la base de Datos
   $sentencia = $conexion->prepare('DELETE FROM `tbl_empleados` WHERE id=:id');
   // Si la consulta necesita datos iran aquí
   $sentencia->bindParam(":id", $id);
@@ -40,8 +55,12 @@ if (isset($_GET['txtID'])) {
             <tr class="">
               <td scope="row"><?= $empleado['id'] ?></td>
               <td><?= $empleado['primernombre'] . " " . $empleado['segundonombre'] . " " . $empleado['primerapellido'] . " " . $empleado['segundoapellido'] ?></td>
-              <td><?= $empleado['foto'] ?></td>
-              <td><?= $empleado['cv'] ?></td>
+              <td>
+                <img src="./images/<?= $empleado['foto'] ?>" width="150px" class="bd-placeholder-img bd-placeholder-img-lg img-fluid rounded" alt="Foto del empleado">
+              </td>
+              <td>
+                <a class="btn btn-secondary" target="_blank" href="./documents/<?= $empleado['cv'] ?>">CV</a>
+              </td>
               <td><?= $empleado['idpuesto'] ?></td>
               <td><?= $empleado['fechadeingreso'] ?></td>
               <td>
