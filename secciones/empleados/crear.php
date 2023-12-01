@@ -85,7 +85,7 @@ if ($_POST) {
         </select>
       </div>
       <a class="btn btn-danger" href="./index.php" role="button">Cancelar</a>
-      <button type="submit" class="btn btn-primary">Crear Puesto</button>
+      <button type="submit" class="btn btn-primary">Crear Empleado</button>
     </form>
   </div>
 </div>

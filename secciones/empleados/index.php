@@ -65,7 +65,7 @@ if (isset($_GET['txtID'])) {
               <td><?= $empleado['fechadeingreso'] ?></td>
               <td>
                 <a class="btn btn-success" href="carta.php">Carta</a>
-                <a class="btn btn-info" href="editar.php">Editar</a>
+                <a class="btn btn-info" href="editar.php?txtID=<?= $empleado['id']; ?>">Editar</a>
                 <a class="btn btn-danger" href="index.php?txtID=<?= $empleado['id']; ?>">Eliminar</a>
               </td>
             </tr>
