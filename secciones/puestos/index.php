@@ -16,8 +16,9 @@ $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
   });
 </script>
 <?php
-echo $_GET['mensaje'];
-if ((isset($_GET['mensaje']) )) : ?>
+if ((isset($_GET['mensaje']) )) :
+  echo $_GET['mensaje'];
+  ?>
   <script>
      Swal.fire({
        title: "¡<?= $_GET['mensaje'] ?>!",

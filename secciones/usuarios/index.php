@@ -15,15 +15,16 @@ $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
   });
 </script>
 <?php
-echo $_GET['mensaje'];
-if ((isset($_GET['mensaje']) )) : ?>
+if ((isset($_GET['mensaje']))) :
+  echo $_GET['mensaje'];
+?>
   <script>
-     Swal.fire({
-       title: "¡<?= $_GET['mensaje'] ?>!",
-       text: "El empleado ha sido <?= $_GET['mensaje'] ?> exitosamente.",
-       icon: "success"
-     });
-   </script>
+    Swal.fire({
+      title: "¡<?= $_GET['mensaje'] ?>!",
+      text: "El empleado ha sido <?= $_GET['mensaje'] ?> exitosamente.",
+      icon: "success"
+    });
+  </script>
 <?php endif;
 if (isset($_GET['txtID'])) {
   // Eliminar un registro de la tabla tbl_usuarios
@@ -33,8 +34,9 @@ if (isset($_GET['txtID'])) {
   // Si la consulta necesita datos iran aquí
   $sentencia->bindParam(":id", $id);
   $sentencia->execute();
-  $mensaje='borrado';
-  header("Location:index.php?mensaje=$mensaje");}
+  $mensaje = 'borrado';
+  header("Location:index.php?mensaje=$mensaje");
+}
 ?>
 <?php require_once('../../templates/header.php') ?><div class="container card">
   <h2>Index de usuarios</h2>

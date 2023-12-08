@@ -1,5 +1,9 @@
 <?php
 $url_base = "http://localhost/app/";
+session_start();
+if (!$_SESSION['logueado']){
+  header('Location:'.$url_base.'login.php');
+}
 ?>
 <!doctype html>
 <html lang="es">

@@ -1,3 +1,4 @@
+<?php require_once('./templates/head.php') ?>
 <?php require_once('./templates/header.php') ?>
 
 <main class="container">

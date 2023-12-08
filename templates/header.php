@@ -35,6 +35,6 @@
       <li class="nav-item"><a href="<?= $url_base ?>secciones/empleados" class="nav-link">Empleados</a></li>
       <li class="nav-item"><a href="<?= $url_base ?>secciones/puestos" class="nav-link">Puestos</a></li>
       <li class="nav-item"><a href="<?= $url_base ?>secciones/usuarios" class="nav-link">Usuarios</a></li>
-      <li class="nav-item"><a href="<?= $url_base ?>login.php" class="nav-link">Iniciar Sesión</a></li>
+      <li class="nav-item"><a href="<?= $url_base ?>logout.php" class="nav-link">Cerrar Sesión</a></li>
     </ul>
   </header>
