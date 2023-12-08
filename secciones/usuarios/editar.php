@@ -7,8 +7,8 @@ if ($_POST) {
   $password = isset($_POST["password"]) ? $_POST["password"] : "";
   $correo = isset($_POST["correo"]) ? $_POST["correo"] : "";
 
-  $sentencia = $conexion->prepare("UPDATE tbl_usuarios 
-  SET usuario=:usuario,password=:password,correo=:correo 
+  $sentencia = $conexion->prepare("UPDATE tbl_usuarios
+  SET usuario=:usuario,password=:password,correo=:correo
   WHERE id=:id");
   // Si la consulta necesita datos iran aquí
   $sentencia->bindParam(":usuario", $usuario);
@@ -16,18 +16,19 @@ if ($_POST) {
   $sentencia->bindParam(":correo", $correo);
   $sentencia->bindParam(":id", $id);
   $sentencia->execute();
-  header("Location:index.php");
+  $mensaje = "Editado";
+  header("Location:index.php?mensaje=$mensaje");
 }
 if (isset($_GET['txtID'])) {
-  // Buscamos los datos del puesto a modificar en la BD 
+  // Buscamos los datos del puesto a modificar en la BD
   $sentencia = $conexion->prepare('SELECT * FROM `tbl_usuarios` WHERE `id`=:id');
   $sentencia->bindParam(":id", $id);
   $sentencia->execute();
   $registro = $sentencia->fetch(PDO::FETCH_LAZY);
 }
 ?>
-<?php require_once('../../templates/header.php') ?>
-<div class="card container">
+<?php require_once('../../templates/head.php') ?>
+<?php require_once('../../templates/header.php') ?><div class="card container">
   <div class="card-header">
     Modificación usuario
   </div>

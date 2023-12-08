@@ -16,8 +16,8 @@ if ($_POST) {
   $foto = isset($_FILES["foto"]["name"]) ? $_FILES["foto"]["name"] : "";
   $cv = isset($_FILES["cv"]["name"]) ? $_FILES["cv"]["name"] : "";
 
-  $sentencia = $conexion->prepare("INSERT 
-  INTO tbl_empleados(primernombre, segundonombre, primerapellido, segundoapellido, foto, cv, idpuesto) 
+  $sentencia = $conexion->prepare("INSERT
+  INTO tbl_empleados(primernombre, segundonombre, primerapellido, segundoapellido, foto, cv, idpuesto)
   VALUES (:primernombre, :segundonombre, :primerapellido, :segundoapellido, :foto, :cv, :idpuesto)");
   // Si la consulta necesita datos iran aquí
   $sentencia->bindParam(":primernombre", $primernombre);
@@ -42,8 +42,8 @@ if ($_POST) {
   header("Location:index.php");
 }
 ?>
-<?php require_once('../../templates/header.php') ?>
-<div class="card container">
+<?php require_once('../../templates/head.php') ?>
+<?php require_once('../../templates/header.php') ?><div class="card container">
   <div class="card-header">
     Agregar empleado
   </div>

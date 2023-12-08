@@ -6,8 +6,8 @@ if ($_POST) {
   $password = isset($_POST["password"]) ? $_POST["password"] : "";
   $correo = isset($_POST["correo"]) ? $_POST["correo"] : "";
 
-  $sentencia = $conexion->prepare("INSERT 
-  INTO tbl_usuarios(usuario, password, correo) 
+  $sentencia = $conexion->prepare("INSERT
+  INTO tbl_usuarios(usuario, password, correo)
   VALUES (:usuario, :password, :correo)");
   // Si la consulta necesita datos iran aquí
   $sentencia->bindParam(":usuario", $usuario);
@@ -17,8 +17,8 @@ if ($_POST) {
   header("Location:index.php");
 }
 ?>
-<?php require_once('../../templates/header.php') ?>
-<div class="card container">
+<?php require_once('../../templates/head.php') ?>
+<?php require_once('../../templates/header.php') ?><div class="card container">
   <div class="card-header">
     Agregar usuario
   </div>

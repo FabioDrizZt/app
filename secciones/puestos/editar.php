@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../../bd.php');
 $id = $_GET["txtID"];
 if ($_POST) {
@@ -10,18 +10,19 @@ if ($_POST) {
   $sentencia->bindParam(":nombredelpuesto", $nombredelpuesto);
   $sentencia->bindParam(":id", $id);
   $sentencia->execute();
-  header("Location:index.php");
+  $mensaje="Editado";
+  header("Location:index.php?mensaje=$mensaje");
 }
 if (isset($_GET['txtID'])) {
-  // Buscamos los datos del puesto a modificar en la BD 
+  // Buscamos los datos del puesto a modificar en la BD
   $sentencia = $conexion->prepare('SELECT `nombredelpuesto` FROM `tbl_puestos` WHERE `id`=:id');
   $sentencia->bindParam(":id", $id);
   $sentencia->execute();
   $registro = $sentencia->fetch(PDO::FETCH_LAZY);
 }
 ?>
-<?php require_once('../../templates/header.php') ?>
-<div class="card container">
+<?php require_once('../../templates/head.php') ?>
+<?php require_once('../../templates/header.php') ?><div class="card container">
   <div class="card-header">
     Modificar puesto
   </div>

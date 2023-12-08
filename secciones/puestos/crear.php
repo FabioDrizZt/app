@@ -11,8 +11,8 @@ if ($_POST) {
   header("Location:index.php");
 }
 ?>
-<?php require_once('../../templates/header.php') ?>
-<div class="card container">
+<?php require_once('../../templates/head.php') ?>
+<?php require_once('../../templates/header.php') ?><div class="card container">
   <div class="card-header">
     Agregar puesto
   </div>

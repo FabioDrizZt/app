@@ -17,7 +17,7 @@ if ($_POST) {
   $sentencia->execute();
   $registro = $sentencia->fetch(PDO::FETCH_LAZY);
 
-  $sentencia2 = $conexion->prepare("UPDATE `tbl_empleados` 
+  $sentencia2 = $conexion->prepare("UPDATE `tbl_empleados`
   SET `primernombre`=:primernombre,`segundonombre`=:segundonombre,
   `primerapellido`=:primerapellido,`segundoapellido`=:segundoapellido,`foto`=:foto,
   `cv`=:cv,`idpuesto`=:idpuesto WHERE id=:id");
@@ -49,7 +49,8 @@ if ($_POST) {
   $sentencia2->bindParam(":id", $id);
 
   $sentencia2->execute();
-  header("Location:index.php");
+  $mensaje = "Editado";
+  header("Location:index.php?mensaje=$mensaje");
 }
 if (isset($_GET['txtID'])) {
   $sentencia = $conexion->prepare('SELECT * FROM `tbl_puestos`');
@@ -57,15 +58,15 @@ if (isset($_GET['txtID'])) {
   $sentencia->execute();
   $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-  // Buscamos los datos del puesto a modificar en la BD 
+  // Buscamos los datos del puesto a modificar en la BD
   $sentencia = $conexion->prepare('SELECT * FROM `tbl_empleados` WHERE `id`=:id');
   $sentencia->bindParam(":id", $id);
   $sentencia->execute();
   $registro = $sentencia->fetch(PDO::FETCH_LAZY);
 }
 ?>
-<?php require_once('../../templates/header.php') ?>
-<div class="card container">
+<?php require_once('../../templates/head.php') ?>
+<?php require_once('../../templates/header.php') ?><div class="card container">
   <div class="card-header">
     Edición de empleado
   </div>

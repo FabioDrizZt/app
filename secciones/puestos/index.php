@@ -1,8 +1,31 @@
+<?php require_once('../../templates/head.php') ?>
+
 <?php require_once('../../bd.php');
 $sentencia = $conexion->prepare('SELECT * FROM `tbl_puestos`');
 // Si la consulta necesita datos iran aquí
 $sentencia->execute();
 $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+?>
+<script>
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: "btn btn-success",
+      cancelButton: "btn btn-danger"
+    },
+    buttonsStyling: false
+  });
+</script>
+<?php
+echo $_GET['mensaje'];
+if ((isset($_GET['mensaje']) )) : ?>
+  <script>
+     Swal.fire({
+       title: "¡<?= $_GET['mensaje'] ?>!",
+       text: "El empleado ha sido <?= $_GET['mensaje'] ?> exitosamente.",
+       icon: "success"
+     });
+   </script>
+<?php endif;
 if (isset($_GET['txtID'])) {
   // Eliminar un registro de la tabla tbl_puestos
   $id = $_GET["txtID"];
@@ -11,13 +34,12 @@ if (isset($_GET['txtID'])) {
   // Si la consulta necesita datos iran aquí
   $sentencia->bindParam(":id", $id);
   $sentencia->execute();
-  header("Location: index.php");
-}
+  $mensaje='borrado';
+  header("Location:index.php?mensaje=$mensaje");}
 
 ?>
 
-<?php require_once('../../templates/header.php') ?>
-<div class="container card">
+<?php require_once('../../templates/header.php') ?><div class="container card">
   <h2>Index de puestos</h2>
   <div class="card-header">
     <a class="btn btn-primary" href="crear.php">Agregar registro</a>
@@ -39,7 +61,7 @@ if (isset($_GET['txtID'])) {
               <td><?= $puesto['nombredelpuesto'] ?></td>
               <td>
                 <a class="btn btn-info" href="editar.php?txtID=<?= $puesto['id']; ?>">Editar</a>
-                <a class="btn btn-danger" href="index.php?txtID=<?= $puesto['id']; ?>">Eliminar</a>
+                <a class="btn btn-danger" href="javascript:borrar(<?= $puesto['id']; ?>)">Eliminar</a>
               </td>
             </tr>
           <?php } ?>
@@ -50,4 +72,28 @@ if (isset($_GET['txtID'])) {
   </div>
 
 </div>
+<script>
+  function borrar(id) {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertirlo!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "¡Sí, bórralo!",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = `index.php?txtID=${id}`;
+      } else {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelado",
+          text: "El puesto esta a salvo",
+          icon: "error"
+        });
+      }
+    });
+  }
+</script>
 <?php require_once('../../templates/footer.php') ?>
