@@ -1,5 +1,7 @@
 <?php require_once('../../bd.php');
-$sentencia = $conexion->prepare('SELECT * FROM `tbl_empleados`');
+$sentencia = $conexion->prepare('SELECT *,
+(SELECT nombredelpuesto FROM tbl_puestos WHERE tbl_puestos.id=tbl_empleados.idpuesto) as puesto
+ FROM `tbl_empleados`');
 // Si la consulta necesita datos iran aquí
 $sentencia->execute();
 $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
@@ -61,10 +63,10 @@ if (isset($_GET['txtID'])) {
               <td>
                 <a class="btn btn-secondary" target="_blank" href="./documents/<?= $empleado['cv'] ?>">CV</a>
               </td>
-              <td><?= $empleado['idpuesto'] ?></td>
+              <td><?= $empleado['puesto'] ?></td>
               <td><?= $empleado['fechadeingreso'] ?></td>
               <td>
-                <a class="btn btn-success" href="carta.php">Carta</a>
+                <a target="_blank" class="btn btn-success" href="carta.php?txtID=<?= $empleado['id']; ?>">Carta</a>
                 <a class="btn btn-info" href="editar.php?txtID=<?= $empleado['id']; ?>">Editar</a>
                 <a class="btn btn-danger" href="index.php?txtID=<?= $empleado['id']; ?>">Eliminar</a>
               </td>
